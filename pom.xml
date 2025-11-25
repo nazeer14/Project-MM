@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.pack</groupId>
+    <artifactId>Maa-Milk-Project</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Micro-Services</name>
+    <description>Parent POM for microservices project</description>
+    <modules>
+        <module>Admin-Server</module>
+        <module>common-lib</module>
+        <module>Api-Gateway</module>
+        <module>Eureka-Service</module>
+        <module>Customer-Service</module>
+        <module>Booking-Service</module>
+        <module>Payment-Service</module>
+        <module>Notification-Service</module>
+        <module>Rating-Service</module>
+        <module>Admin-Service</module>
+        <module>Farm-Service</module>
+        <module>Delivery-Service</module>
+
+    </modules>
+
+
+    <properties>
+        <java.version>17</java.version>
+        <spring.boot.version>3.2.4</spring.boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>3.5.4</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

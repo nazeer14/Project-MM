@@ -1,0 +1,16 @@
+ __  __                   __      __      _  __   __
+|  \/  |  /\        /\    | \    / | (-) | | | | / /
+| \  / | /  \      /  \   | |\  /| | | | | | | |/ /
+| |\/| |/ /\ \    / /\ \  | | \/ | | | | | | | | \
+| |  | / ____ \  / ____ \ | |    | | | | | | | |\ \
+|_|  |_/_/   \_\/_/    \_\|_|    |_| |_| |_| |_| \_\
+
+        🥛  M A A   M I L K  🥛
+----------------------------------------
+   Fresh • Organic • Pure • Transparent
+----------------------------------------
+Application     : ${spring.application.name}
+Spring Boot Ver : ${spring.boot.version}
+Java Version    : ${java.version}
+Profile Active  : ${spring.profiles.active}
+----------------------------------------
