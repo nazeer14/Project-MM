@@ -1,7 +1,7 @@
 package com.mm.bookings.service;
 
 import com.mm.bookings.dto.CreateOrderRequest;
-import com.mm.bookings.dto.OrderResponse;
+import com.mm.bookings.response.OrderResponse;
 import com.mm.bookings.dto.UpdateOrderPaymentRequest;
 import com.mm.bookings.dto.UpdateOrderStatusRequest;
 import org.springframework.data.domain.Page;

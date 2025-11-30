@@ -1,6 +1,9 @@
 package com.mm.bookings.controller;
 
+import com.mm.bookings.client.CustomerClient;
 import com.mm.bookings.dto.*;
+import com.mm.bookings.response.ApiResponse;
+import com.mm.bookings.response.OrderResponse;
 import com.mm.bookings.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,13 @@ import java.net.URI;
 public class OrderController {
 
     private final OrderService orderService;
+    private final CustomerClient customerClient;
+
+    @GetMapping("/feignTest")
+    public ResponseEntity<ApiResponse<?>> testFeignClient(){
+
+        return ResponseEntity.ok(ApiResponse.ok("Successfully called api",customerClient.testApi()));
+    }
 
     /**
      * Create a new order

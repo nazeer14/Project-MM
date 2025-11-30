@@ -1,5 +1,6 @@
 package com.mm.bookings.entity;
 
+import com.mm.bookings.dto.PaymentMode;
 import com.mm.bookings.enums.OrderStatus;
 import com.mm.bookings.enums.PaymentStatus;
 import jakarta.persistence.*;
@@ -48,6 +49,10 @@ public class Order {
 
     @Column(nullable = false)
     private Double amount;
+
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMode paymentMode;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;

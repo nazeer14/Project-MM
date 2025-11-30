@@ -1,7 +1,7 @@
 package com.mm.bookings.mapper;
 
 import com.mm.bookings.dto.CreateOrderRequest;
-import com.mm.bookings.dto.OrderResponse;
+import com.mm.bookings.response.OrderResponse;
 import com.mm.bookings.dto.UpdateOrderPaymentRequest;
 import com.mm.bookings.dto.UpdateOrderStatusRequest;
 import com.mm.bookings.entity.Order;

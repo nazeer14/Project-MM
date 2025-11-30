@@ -54,7 +54,7 @@ spring:
           predicates:
             - Path=/farm-service/**
           filters:
-            - RewritePath=/customer-service/(?<segment>.*), /${segment}
+            - RewritePath=/farm-service/(?<segment>.*), /${segment}
             - PreserveHostHeader
             - name: StripPrefix
               args:
@@ -71,8 +71,10 @@ spring:
         - id: booking-service
           uri: lb://BOOKING-SERVICE
           predicates:
-            - Path=/orders/**
+            - Path=/booking-service/**
           filters:
+            - RewritePath=/booking-service/(?<segment>.*), /${segment}
+            - PreserveHostHeader
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 100
@@ -80,6 +82,13 @@ spring:
             - name: StripPrefix
               args:
                 parts: 1
+
+        - id: booking-service-api-docs
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/v3/api-docs/booking-service
+          filters:
+            - SetPath=/v3/api-docs
 
         - id: payment-service
           uri: lb://PAYMENT-SERVICE

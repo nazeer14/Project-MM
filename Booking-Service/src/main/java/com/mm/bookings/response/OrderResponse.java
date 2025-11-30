@@ -1,4 +1,4 @@
-package com.mm.bookings.dto;
+package com.mm.bookings.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +20,9 @@ public class OrderResponse {
     private String status;
 
     private Double amount;
+
     private String paymentMode;
+
     private String paymentStatus;
 
     private LocalDateTime createdAt;

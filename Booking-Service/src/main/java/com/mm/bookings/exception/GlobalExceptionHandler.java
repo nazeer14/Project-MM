@@ -1,6 +1,6 @@
 package com.mm.bookings.exception;
 
-import com.mm.bookings.dto.ApiResponse;
+import com.mm.bookings.response.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.sql.SQLDataException;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -21,6 +20,13 @@ public class GlobalExceptionHandler {
     // 1) Order not found (custom)
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<ApiResponse> handleOrderNotFound(OrderNotFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        return ResponseEntity
+                .status(status)
+                .body(ApiResponse.error(status.value(), ex.getMessage()));
+    }
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public ResponseEntity<ApiResponse> handleOrderNotFound(CustomerNotFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         return ResponseEntity
                 .status(status)
@@ -85,14 +91,7 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(status.value(), "Database constraint violation"));
     }
 
-    // 6) DB constraint violations (unique, FK, etc.)
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ApiResponse> sqlException(SQLDataException ex) {
-        HttpStatus status = HttpStatus.CONFLICT;
-        return ResponseEntity
-                .status(status)
-                .body(ApiResponse.error(status.value(), "Database violation"));
-    }
+
 
 //    // 7) Errors from other microservices via Feign
 //    @ExceptionHandler(FeignException.class)

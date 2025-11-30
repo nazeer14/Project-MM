@@ -1,5 +1,6 @@
 package com.mm.customer.controller;
 
+import com.mm.customer.dto.CustomerResponse;
 import com.mm.customer.dto.OrderDto;
 import com.mm.customer.entity.Customer;
 import com.mm.customer.response.ApiResponse;
@@ -26,7 +27,17 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getByCustomerId(@PathVariable("id") Long id){
         Customer customer=customerService.getById(id);
-        return ResponseEntity.ok(customer);
+        CustomerResponse customerResponse=
+                new CustomerResponse(
+                        customer.getId(),
+                        customer.getName(),
+                        customer.getLocation(),
+                        customer.getContactNumber(),
+                        customer.getVerified(),
+                        customer.getLocked()
+                        );
+
+        return ResponseEntity.ok(customerResponse);
     }
 
     @GetMapping("/get-orders/{id}")

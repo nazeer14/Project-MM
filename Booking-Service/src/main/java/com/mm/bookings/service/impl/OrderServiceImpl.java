@@ -1,15 +1,16 @@
 package com.mm.bookings.service.impl;
 
-import com.mm.bookings.dto.CreateOrderRequest;
-import com.mm.bookings.dto.OrderResponse;
-import com.mm.bookings.dto.UpdateOrderPaymentRequest;
-import com.mm.bookings.dto.UpdateOrderStatusRequest;
+import com.mm.bookings.client.CustomerClient;
+import com.mm.bookings.dto.*;
 import com.mm.bookings.entity.Order;
 import com.mm.bookings.enums.OrderStatus;
 import com.mm.bookings.enums.PaymentStatus;
+import com.mm.bookings.exception.CustomerNotFoundException;
 import com.mm.bookings.exception.OrderNotFoundException;
 import com.mm.bookings.mapper.OrderMapper;
 import com.mm.bookings.repository.OrderRepository;
+import com.mm.bookings.response.CustomerResponse;
+import com.mm.bookings.response.OrderResponse;
 import com.mm.bookings.service.OrderService;
 import com.mm.bookings.utils.OrderIdGenerator;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final OrderIdGenerator orderIdGenerator;
+    private final CustomerClient customerClient;
 
     @Override
     @Transactional
@@ -35,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
 
         // 1. Generate unique orderId
         String orderId = orderIdGenerator.generate();
+
+        CustomerResponse response = customerClient.getCustomerById(request.getCustomerId());
+
+        if (response == null || response.getLocked()) {
+            throw new CustomerNotFoundException("Invalid Customer Id: " + request.getCustomerId());
+        }
 
         // 2. Map DTO -> Entity
         Order order = orderMapper.toEntity(request, orderId);

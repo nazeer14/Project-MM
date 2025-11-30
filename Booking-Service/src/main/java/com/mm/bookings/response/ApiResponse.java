@@ -1,4 +1,4 @@
-package com.mm.bookings.dto;
+package com.mm.bookings.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
